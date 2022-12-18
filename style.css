@@ -29,7 +29,8 @@ main{
     display: flex;
 }
 .sidebar{
-    width:275px;
+    box-sizing: border-box;
+    min-width: 275px;
     padding: 35px 25px;
     border-radius: 9px;
     background-image: url("./assets/images/bg-sidebar-desktop.svg");
@@ -55,6 +56,7 @@ span.number{
     color: hsl(213, 96%, 18%);
     background-color: hsl(206, 94%, 87%);
     border-color: hsl(206, 94%, 87%);
+    transition: all .25s ease-in-out;
 }
 .step_info{
     display: flex;
@@ -72,8 +74,8 @@ span.number{
     letter-spacing: 1px;
 }
 .content{
-    flex-grow: 1;
-    padding: 25px 85px;
+    flex-grow:1;
+    padding: 25px 115px;
     display: flex;
     flex-direction: column;
 }
@@ -121,6 +123,12 @@ button:hover{
     color: hsl(231, 11%, 63%);
     margin-block: 0 2rem;
 }
+.main-step.active{
+    display: initial;
+}
+.main-step{
+    display: none;
+}
 .inputField{
     margin:20px 0;
     display: flex;
@@ -157,4 +165,89 @@ button:hover{
 }
 .inputField.error input{
     border-color: hsl(354, 84%, 57%);
+}
+.plans{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px 20px;
+}
+.plan{
+    padding: 20px 15px 15px;
+    border-radius: 9px;
+    flex-grow: 1;
+    min-width: 33%;
+    border: 1px solid hsl(229, 24%, 87%);
+    cursor: pointer;
+    transition: border .25s ease-in-out;
+}
+.plan:hover,.plan.active{
+    border-color: hsl(243, 100%, 62%);
+}
+.plan.active{
+    background-color:hsl(217, 100%, 97%);
+}
+.plan-title{
+    color: hsl(213, 96%, 18%);
+    margin-block:45px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.plan-price{
+    color: hsl(231, 11%, 63%);
+    margin-block: 7px;
+    font-size: .95rem;
+}
+.plan-price+span{
+    font-size: .9rem;
+    color: hsl(213, 96%, 18%);
+    font-weight:500;
+    display: none;
+}
+.plan-price.yearly+span{
+    display: initial;
+}
+.billing-toggle input[type="checkbox"]{
+    display:none;
+}
+.billing-toggle label{
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    color: hsl(231, 11%, 63%);
+}
+.billing-toggle label.active{
+    color: hsl(213, 96%, 18%);
+}
+.billing-toggle{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: hsl(217, 100%, 97%);
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 7px;
+}
+.billing-toggle span{
+    display:block;
+    background-color: hsl(213, 96%, 18%);
+    width:40px;
+    height:20px;
+    padding: 5px 3px;
+    border-radius:10px;
+    position: relative;
+}
+.billing-toggle span::after{
+    content: "";
+    display: block;
+    position: relative;
+    top: -1px;
+    width:12px;
+    height:12px;
+    border-radius: 50%;
+    background-color: white;
+    transition: all .25s ease-in-out;
+    transform: translateX(0);
+}
+.billing-toggle input:checked~span::after{
+    transform: translateX(22px);
 }
