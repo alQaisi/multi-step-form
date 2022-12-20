@@ -79,8 +79,8 @@ span.number{
     display: flex;
     flex-direction: column;
 }
-.hidden{
-    display: none;
+.center{
+    justify-content: center;
 }
 button{
     font-weight: 500;
@@ -115,13 +115,20 @@ button:hover{
     align-items: center;
     margin-top: auto;
 }
-.main-step .title{
+.confirmation{
+    text-align: center;
+}
+.main-step .title,.confirmation .title{
     color: hsl(213, 96%, 18%);
     margin-block-end:.5rem;
 }
-.main-step .title + p{
+.main-step .title + p,.confirmation .title + p{
     color: hsl(231, 11%, 63%);
     margin-block: 0 2rem;
+}
+.confirmation p{
+    margin-top: 15px !important;
+    line-height: 1.35rem;
 }
 .main-step.active{
     display: initial;
@@ -314,4 +321,61 @@ button:hover{
 .add-on-price{
     color: hsl(243, 100%, 62%);
     font-weight: 500;   
+}
+.plan-details{
+    background-color: hsl(217, 100%, 97%);
+    border-radius: 7px;
+    padding: 15px 25px 25px;
+}
+.plan-details h3{
+    margin-block: 10px;
+    font-size: 1.1rem;
+    color:  hsl(213, 96%, 18%);
+}
+.plan-details .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid hsla(229, 24%, 87%, 0.562);
+}
+.header h3:first-of-type{
+    margin-block-end:7px;
+}
+.header .change{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    color: hsl(231, 11%, 63%);
+}
+.addOns{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.addOn{
+    display: flex;
+    justify-content: space-between;
+    font-size: .95rem;
+}
+.addOn-title{
+    color: hsl(231, 11%, 63%);
+    font-weight: 500;
+}
+.addOn-price{
+    color: hsl(213, 96%, 18%);
+    font-weight: 500;
+}
+.addOn.total{
+    width: 90%;
+    margin: 25px auto;
+}
+.addOn.total .addOn-price{
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: hsl(243, 100%, 62%);
+}
+.hidden{
+    display: none;
 }
