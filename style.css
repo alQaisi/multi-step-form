@@ -379,6 +379,9 @@ button:hover{
 .hidden{
     display: none;
 }
+.hiddenElems{
+    visibility: hidden;
+}
 @media screen and (max-width:965px) {
     .sidebar{
         min-width:unset;

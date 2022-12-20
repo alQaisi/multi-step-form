@@ -55,6 +55,8 @@ function toggleSteps(direction){
     active_main_step.classList.toggle("active");
     steps[active_index+step].classList.toggle("active");
     mainSteps[active_index+step].classList.toggle("active");
+    if(backBtn.classList.contains("hiddenElems") || (active_index+step)==0)
+        backBtn.classList.toggle("hiddenElems");
     if((step+active_index)===3){
         nextBtn.classList.toggle("hidden");
         confirmBtn.classList.toggle("hidden");
