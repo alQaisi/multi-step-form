@@ -5,14 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon.ico">
-  
-  <title>Frontend Mentor | Multi-step form</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <title>Multi-step form</title>
 </head>
 <body>
   
@@ -56,6 +49,16 @@
     
     <div class="content">
       
+      <div class="confirmation hidden">
+        <img src="./assets/images/icon-thank-you.svg" alt="Thanks">
+        <h1 class="title">Thank you!</h1>
+        <p>
+          Thanks for confirming your subscription! We hope you have fun 
+          using our platform. If you ever need support, please feel free 
+          to email us at support@loremgaming.com.
+        </p>
+      </div>
+
       <div class="main-section">
 
         <div class="step1 main-step active">
@@ -90,21 +93,21 @@
 
           <div class="plans">
 
-            <div class="plan active">
+            <div class="plan active" id="Arcade">
               <img class="plan-icon" src="./assets/images/icon-arcade.svg" alt="Arcade"/>
               <h2 class="plan-title">Arcade</h2>
               <p class="plan-price">$9/mo</p>
               <span>2 months free</span>
             </div>
 
-            <div class="plan">
+            <div class="plan" id="Advanced">
               <img class="plan-icon" src="./assets/images/icon-advanced.svg" alt="Advanced"/>
               <h2 class="plan-title">Advanced</h2>
               <p class="plan-price">$12/mo</p>
               <span>2 months free</span>
             </div>
 
-            <div class="plan">
+            <div class="plan" id="Pro">
               <img class="plan-icon" src="./assets/images/icon-pro.svg" alt="Pro"/>
               <h2 class="plan-title">Pro</h2>
               <p class="plan-price">$15/mo</p>
@@ -161,6 +164,34 @@
 
         </div>
 
+        <div class="step4 main-step">
+
+          <h1 class="title">Finishing up</h1>
+          <p>Double-check everything looks OK before confirming.</p>
+
+          <div class="plan-details">
+
+            <div class="header">
+              <div>
+                <h3 class="plan-name">
+                  Arcade (<span class="billing-type">Monthly</span>)
+                </h3>
+                <span class="change">Change</span>
+              </div>
+              <h3 class="plan-price">$90/yr</h3>
+            </div>
+            
+            <div class="addOns"></div>
+
+          </div>
+
+          <span class="addOn total">
+            <span class="addOn-title">Total (per <span class="billing-total">year</span>) </span>
+            <span class="addOn-price">$120/yr</span>
+          </span>
+
+        </div>
+
       </div>
 
       <div class="footer">
@@ -172,22 +203,6 @@
     </div>
 
   </main>
-
-  <!-- Finishing up
-  Double-check everything looks OK before confirming. -->
-
-  <!-- Total (per month/year)
-
-  Go Back
-  Confirm -->
-
-
-
-  <!-- Thank you!
-
-  Thanks for confirming your subscription! We hope you have fun 
-  using our platform. If you ever need support, please feel free 
-  to email us at support@loremgaming.com. -->
   <script src="script.js"></script>
 </body>
 </html>
