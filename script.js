@@ -115,7 +115,14 @@ const yearlyAddOns=[10,20,20];
 const addOns=[...document.querySelectorAll(".add-on input")];
 const addOnsPrices=[...document.querySelectorAll(".add-on-price")];
 
-addOns.forEach((addOn,index)=>addOn.addEventListener("change",()=>{
+addOns.forEach((addOn)=>addOn.addEventListener("change",()=>{
+    planAddOns.innerHTML="";
+    managingAddOns();
+    total=calculateTotal();
+
+}));
+
+function managingAddOns(){
     planAddOns.innerHTML="";
     addOns.forEach((addon,index)=>{
         if(!addon.checked)
@@ -135,10 +142,7 @@ addOns.forEach((addOn,index)=>addOn.addEventListener("change",()=>{
         planAddOns.appendChild(addOnCont);
 
     })
-    total=calculateTotal();
-
-}));
-
+}
 
 // Picking add-ons -- END
 
@@ -186,8 +190,9 @@ billingToggle.addEventListener("change",()=>{
 
     selectedPlan.textContent=`${activePlan.id} (${capital(billing)})`;
     total=calculateTotal();
-
     totalBillingType.textContent=billing==="monthly"?"month":"year";
+    
+    managingAddOns();
 });
 
 // Selecting Plan & Toggle billing -- END
