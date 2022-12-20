@@ -1,15 +1,45 @@
 let formStatus="personalInfo";
 let billing="monthly";
 let total=0;
-
+const totalPrice=document.querySelector(".addOn.total .addOn-price");
+const totalBillingType=document.querySelector(".addOn.total .billing-total");
+const selectedPlan=document.querySelector(".plan-name");
+const billingType=document.querySelector(".billing-type");
+const change=document.querySelector(".change");
+const planPrice=document.querySelector(".step4 .plan-price");
+const planAddOns=document.querySelector(".addOns");
 const steps=document.querySelectorAll(".step");
 const mainSteps=document.querySelectorAll(".main-step");
+const footer=document.querySelector(".footer");
 
 // Controll Moving between Steps -- START
 
 const [backBtn,nextBtn,confirmBtn]=document.querySelectorAll(".footer button");
 backBtn.addEventListener("click",()=>toggleSteps("back"));
 nextBtn.addEventListener("click",()=>toggleSteps("next"))
+
+change.addEventListener("click",moveToChangePlan);
+
+confirmBtn.addEventListener("click",()=>{
+    footer.classList.toggle("hidden");
+    const confirmation=document.querySelector(".confirmation");
+    const active_step=document.querySelector(".main-step.active");
+    active_step.classList.toggle("active");
+    confirmation.classList.toggle("hidden");
+    const container=document.querySelector(".content");
+    container.classList.toggle("center");
+});
+
+function moveToChangePlan(){
+    const active_step=document.querySelector(".step.active");
+    const active_main_step=document.querySelector(".main-step.active");
+    active_step.classList.toggle("active");
+    active_main_step.classList.toggle("active");
+    steps[1].classList.toggle("active");
+    mainSteps[1].classList.toggle("active");
+    nextBtn.classList.toggle("hidden");
+    confirmBtn.classList.toggle("hidden");
+}
 
 function toggleSteps(direction){
     const check=formStatus==="personalInfo"?validatePersonalInfo():"NO_NEED_FOR_VALIDATION";
@@ -33,6 +63,7 @@ function toggleSteps(direction){
         confirmBtn.classList.toggle("hidden");
     }
     total=calculateTotal();
+    totalPrice.textContent=`$${total}/${billing==="monthly"?"mo":"yr"}`;
 }
 
 // Controll Moving between Steps -- END
@@ -84,7 +115,30 @@ const yearlyAddOns=[10,20,20];
 const addOns=[...document.querySelectorAll(".add-on input")];
 const addOnsPrices=[...document.querySelectorAll(".add-on-price")];
 
-addOns.forEach(addOn=>addOn.addEventListener("change",calculateTotal));
+addOns.forEach((addOn,index)=>addOn.addEventListener("change",()=>{
+    planAddOns.innerHTML="";
+    addOns.forEach((addon,index)=>{
+        if(!addon.checked)
+            return ;
+        const addOnCont=document.createElement("span");
+        addOnCont.className="addOn";
+
+        const addOnTitle=document.createElement("span");
+        addOnTitle.className="addOn-title";
+        addOnTitle.textContent=addon.name;
+
+        const addOnPrice=document.createElement("span");
+        addOnPrice.className="addOn-price";
+        addOnPrice.textContent=billing==="monthly"?`+$${monthlyAddOns[index]}/mo`:`+$${yearlyAddOns[index]}/yr`;
+
+        addOnCont.append(addOnTitle,addOnPrice);
+        planAddOns.appendChild(addOnCont);
+
+    })
+    total=calculateTotal();
+
+}));
+
 
 // Picking add-ons -- END
 
@@ -99,11 +153,16 @@ const planPrices=document.querySelectorAll(".plan-price");
 const monthlyBilling=[9,12,15];
 const yearlyBilling=[90,120,150];
 
-plans.forEach(plan=>{
+planPrice.textContent=billing==="monthly"?`$${monthlyBilling[0]}/mo`:`$${yearlyBilling[0]}/yr`;
+totalBillingType.textContent=billing==="monthly"?"month":"year";
+
+plans.forEach((plan,index)=>{
     plan.addEventListener("click",function(){
         activePlan.classList.remove("active");
         this.classList.add("active");
         activePlan=this;
+        selectedPlan.textContent=`${activePlan.id} (${capital(billing)})`;
+        planPrice.textContent=billing==="monthly"?`$${monthlyBilling[index]}/mo`:`$${yearlyBilling[index]}/yr`;
         total=calculateTotal();
     })
 })
@@ -121,10 +180,23 @@ billingToggle.addEventListener("change",()=>{
         const price=billing==="monthly"?`$${monthlyAddOns[index]}/mo`:`$${yearlyAddOns[index]}/yr`;
         addOnPrice.textContent=price;
     });
+    
+    const index=plans.indexOf(activePlan);
+    planPrice.textContent=billing==="monthly"?`$${monthlyBilling[index]}/mo`:`$${yearlyBilling[index]}/yr`;
+
+    selectedPlan.textContent=`${activePlan.id} (${capital(billing)})`;
     total=calculateTotal();
+
+    totalBillingType.textContent=billing==="monthly"?"month":"year";
 });
 
 // Selecting Plan & Toggle billing -- END
+
+// Finishing up -- START
+
+
+
+// Finishing up -- END
 
 function calculateTotal(){
     const planPrice=billing==="monthly"?monthlyBilling[plans.indexOf(activePlan)]:yearlyBilling[plans.indexOf(activePlan)];
@@ -134,6 +206,10 @@ function calculateTotal(){
             return acc+price;
         return acc;
     },0)
-    console.log(planPrice+addOnsPrice);
     return planPrice+addOnsPrice;
+}
+
+function capital(string=""){
+    const newChar=string[0].toUpperCase();
+    return newChar+string.slice(1);
 }
